@@ -1,0 +1,27 @@
+entity ProductCategory{
+	categoryName String
+}
+
+entity Product{
+	productName String,
+    price Float,
+    description TextBlob
+}
+
+entity Review{
+	comment TextBlob,
+    rating RatingEnum
+}
+
+enum RatingEnum{
+	WEAK,
+    ACCEPTABLE,
+    GOOD,
+    RECOMMANDED,
+    EXCELENT
+}
+
+relationship ManyToOne{
+	Product{productCategory(categoryName)} to ProductCategory
+  	Review{product(productName)} to Product
+}

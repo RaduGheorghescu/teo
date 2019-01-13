@@ -1,0 +1,23 @@
+entity Category{
+	categoryName String required
+}
+entity Entry {
+    title String required,
+    content TextBlob required,
+    date ZonedDateTime required
+}
+
+entity Tag {
+    name String required minlength(2)
+}
+
+relationship ManyToOne {
+    Entry{user(login)} to User,
+    Entry{category(categoryName)} to Category
+}
+
+relationship ManyToMany {
+    Entry{tag(name)} to Tag{entry}
+}
+
+paginate Entry, Tag with infinite-scroll
